@@ -41,8 +41,12 @@ const AppProvider = ({ children }) => {
                 setLoading(false);
             } else {
                 setError(true)
+                setWaiting(true)
                 setLoading(false)
             }
+        } else {
+            //if we get error in response to not ruin our app show setupForm screen
+            setWaiting(true)
         }
     }
     // *** NEXT QUESTION ***
@@ -125,7 +129,8 @@ const AppProvider = ({ children }) => {
             closeModal,
             quiz,
             handleSubmit,
-            handleChange
+            handleChange,
+            error
         }
     }>
         {children}
