@@ -20,6 +20,7 @@ function App() {
   const answers = [correct_answer, ...incorrect_answers];
   return (
     <main>
+      <Modal />
       <section className="quiz">
         <p className="correct-answers">correct answers {correct}/{index}</p>
         <article className="container">

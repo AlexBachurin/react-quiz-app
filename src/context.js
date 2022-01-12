@@ -18,6 +18,8 @@ const AppProvider = ({ children }) => {
     const [correct, setCorrect] = useState(0)
     //state for error if we fetched incorect amount
     const [error, setError] = useState(false)
+    //state for modal
+    const [isModalOpen, setIsModalOpen] = useState(false)
 
     const fetchQuestions = async (url) => {
         //show loading and disable setupForm state
@@ -42,11 +44,16 @@ const AppProvider = ({ children }) => {
             //check if we are not out of bounds of questions length
             let index = oldIndex + 1;
             if (index > questions.length - 1) {
-                return 0;
+                //if we reached end of questions show modal with results
+                //and reset correct answers and index of current question
+                openModal();
+                setCorrect(0);
+                setIndex(0);
             }
             return index;
         })
     }
+
     // *** CHECK CORRECT ANSWER ***
     //here we will accept value which will be either true or false by comparing user click with current correct answer
     const checkAnswer = (value) => {
@@ -58,6 +65,16 @@ const AppProvider = ({ children }) => {
         }
         //and anyway we wanna go to the next question
         nextQuestion();
+    }
+
+    /// *** MODAL ***
+    const openModal = () => {
+        setIsModalOpen(true)
+    }
+    const closeModal = () => {
+        //close modal and return to setupForm state
+        setIsModalOpen(false);
+        setWaiting(true);
     }
 
     useEffect(() => {
@@ -77,7 +94,9 @@ const AppProvider = ({ children }) => {
             correct,
             error,
             nextQuestion,
-            checkAnswer
+            checkAnswer,
+            isModalOpen,
+            closeModal
         }
     }>
         {children}
