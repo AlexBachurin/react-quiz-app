@@ -1,7 +1,7 @@
 import React from 'react'
 import { useGlobalContext } from '../context';
 const SetupForm = () => {
-    const { quiz, handleSubmit } = useGlobalContext();
+    const { quiz, handleSubmit, handleChange } = useGlobalContext();
     return (
         <section className='quiz quiz-small'>
             <form className='setup-form'>
@@ -16,11 +16,12 @@ const SetupForm = () => {
                         min={1}
                         max={50}
                         value={quiz.amount}
+                        onChange={handleChange}
                     />
                 </div>
                 <div className="form-control">
                     <label htmlFor="category">category</label>
-                    <select className='form-input' name="category" id="category" value={quiz.category}>
+                    <select onChange={handleChange} className='form-input' name="category" id="category" value={quiz.category}>
                         <option value="sports">sports</option>
                         <option value="politics">politics</option>
                         <option value="history">history</option>
@@ -28,7 +29,7 @@ const SetupForm = () => {
                 </div>
                 <div className="form-control">
                     <label htmlFor="difficulty">select difficulty</label>
-                    <select className='form-input' name="difficulty" id="difficulty" value={quiz.difficulty}>
+                    <select onChange={handleChange} className='form-input' name="difficulty" id="difficulty" value={quiz.difficulty}>
                         <option value="easy">easy</option>
                         <option value="medium">medium</option>
                         <option value="hard">hard</option>

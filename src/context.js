@@ -4,6 +4,7 @@ import axios from 'axios'
 let url = 'https://opentdb.com/api.php?amount=10&category=21&difficulty=easy&type=multiple';
 const AppContext = React.createContext();
 
+//table for categories because we have not strings as categories but numbers
 const categoryTable = {
     sports: 21,
     history: 23,
@@ -91,6 +92,15 @@ const AppProvider = ({ children }) => {
         fetchQuestions(url)
     }
 
+    const handleChange = (e) => {
+        const name = e.target.name;
+        const value = e.target.value;
+        console.log(name, value)
+        setQuiz(quiz => {
+            return { ...quiz, [name]: value }
+        })
+    }
+
     // useEffect(() => {
     //     fetchQuestions(url);
 
@@ -112,7 +122,8 @@ const AppProvider = ({ children }) => {
             isModalOpen,
             closeModal,
             quiz,
-            handleSubmit
+            handleSubmit,
+            handleChange
         }
     }>
         {children}
