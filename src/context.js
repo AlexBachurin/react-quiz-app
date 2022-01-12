@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useContext } from "react";
 import axios from 'axios'
 
 let url = 'https://opentdb.com/api.php?amount=10&category=21&difficulty=easy&type=multiple';
@@ -52,9 +52,8 @@ const AppProvider = ({ children }) => {
             let index = oldIndex + 1;
             if (index > questions.length - 1) {
                 //if we reached end of questions show modal with results
-                //and reset correct answers and index of current question
+                //and index of current question
                 openModal();
-                setCorrect(0);
                 setIndex(0);
             }
             return index;
@@ -77,11 +76,14 @@ const AppProvider = ({ children }) => {
     /// *** MODAL ***
     const openModal = () => {
         setIsModalOpen(true)
+
     }
     const closeModal = () => {
         //close modal and return to setupForm state
         setIsModalOpen(false);
         setWaiting(true);
+        //reset correct answers here after we showed modal with results 
+        setCorrect(0);
     }
 
     // *** FORM ***
