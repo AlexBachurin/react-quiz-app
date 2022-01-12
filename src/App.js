@@ -5,7 +5,7 @@ import Loading from "./components/Loading";
 import { useGlobalContext } from './context'
 
 function App() {
-  const { loading, waiting, questions, correct, index, nextQuestion } = useGlobalContext();
+  const { loading, waiting, questions, correct, index, nextQuestion, checkAnswer } = useGlobalContext();
   if (waiting) {
     return <SetupForm />
   }
@@ -26,9 +26,9 @@ function App() {
           {/* use dangerouslyHtml since we get not strings in response but html */}
           <h2 dangerouslySetInnerHTML={{ __html: question }} />
           <div className="btn-container">
-            {answers.map((item, index) => {
+            {answers.map((answer, index) => {
               return (
-                <button key={index} className="answer-btn" dangerouslySetInnerHTML={{ __html: item }} />
+                <button key={index} className="answer-btn" onClick={() => checkAnswer(correct_answer === answer)} dangerouslySetInnerHTML={{ __html: answer }} />
 
               )
             })}

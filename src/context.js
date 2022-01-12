@@ -47,6 +47,18 @@ const AppProvider = ({ children }) => {
             return index;
         })
     }
+    // *** CHECK CORRECT ANSWER ***
+    //here we will accept value which will be either true or false by comparing user click with current correct answer
+    const checkAnswer = (value) => {
+        //if correct
+        if (value) {
+            setCorrect(oldValue => {
+                return oldValue + 1;
+            })
+        }
+        //and anyway we wanna go to the next question
+        nextQuestion();
+    }
 
     useEffect(() => {
         fetchQuestions(url);
@@ -64,7 +76,8 @@ const AppProvider = ({ children }) => {
             index,
             correct,
             error,
-            nextQuestion
+            nextQuestion,
+            checkAnswer
         }
     }>
         {children}
