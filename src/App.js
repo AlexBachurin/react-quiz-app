@@ -5,7 +5,7 @@ import Loading from "./components/Loading";
 import { useGlobalContext } from './context'
 
 function App() {
-  const { loading, waiting, questions, correct, index } = useGlobalContext();
+  const { loading, waiting, questions, correct, index, nextQuestion } = useGlobalContext();
   if (waiting) {
     return <SetupForm />
   }
@@ -17,7 +17,7 @@ function App() {
   console.log(currentQuestion);
   //destructure and get array of answers from data
   const { question, correct_answer, incorrect_answers } = currentQuestion;
-  const answers = [...correct_answer, ...incorrect_answers];
+  const answers = [correct_answer, ...incorrect_answers];
   return (
     <main>
       <section className="quiz">
@@ -33,7 +33,7 @@ function App() {
               )
             })}
           </div>
-          <button className="next-question">next question</button>
+          <button onClick={nextQuestion} className="next-question">next question</button>
         </article>
       </section>
     </main>

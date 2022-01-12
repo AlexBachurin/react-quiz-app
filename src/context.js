@@ -36,6 +36,17 @@ const AppProvider = ({ children }) => {
             }
         }
     }
+    // *** NEXT QUESTION ***
+    const nextQuestion = () => {
+        setIndex(oldIndex => {
+            //check if we are not out of bounds of questions length
+            let index = oldIndex + 1;
+            if (index > questions.length - 1) {
+                return 0;
+            }
+            return index;
+        })
+    }
 
     useEffect(() => {
         fetchQuestions(url);
@@ -52,7 +63,8 @@ const AppProvider = ({ children }) => {
             questions,
             index,
             correct,
-            error
+            error,
+            nextQuestion
         }
     }>
         {children}
