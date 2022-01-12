@@ -4,7 +4,11 @@ import axios from 'axios'
 let url = 'https://opentdb.com/api.php?amount=10&category=21&difficulty=easy&type=multiple';
 const AppContext = React.createContext();
 
-
+const categoryTable = {
+    sports: 21,
+    history: 23,
+    politics: 24,
+}
 
 const AppProvider = ({ children }) => {
     //state for waiting before we complete and submit quiz form
@@ -20,6 +24,8 @@ const AppProvider = ({ children }) => {
     const [error, setError] = useState(false)
     //state for modal
     const [isModalOpen, setIsModalOpen] = useState(false)
+    //state for quiz setup
+    const [quiz, setQuiz] = useState({ amount: 10, category: 'sports', difficulty: 'easy' })
 
     const fetchQuestions = async (url) => {
         //show loading and disable setupForm state
@@ -77,10 +83,18 @@ const AppProvider = ({ children }) => {
         setWaiting(true);
     }
 
-    useEffect(() => {
-        fetchQuestions(url);
+    // *** FORM ***
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        // here we construct url based on what we choose in form setup
+        url = `https://opentdb.com/api.php?amount=${quiz.amount}&category=${categoryTable[quiz.category]}&difficulty=${quiz.difficulty}`
+        fetchQuestions(url)
+    }
 
-    }, [])
+    // useEffect(() => {
+    //     fetchQuestions(url);
+
+    // }, [])
 
 
 
@@ -96,7 +110,9 @@ const AppProvider = ({ children }) => {
             nextQuestion,
             checkAnswer,
             isModalOpen,
-            closeModal
+            closeModal,
+            quiz,
+            handleSubmit
         }
     }>
         {children}
