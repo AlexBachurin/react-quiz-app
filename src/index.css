@@ -37,6 +37,22 @@
   --dark-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
   --max-width: 1170px;
   --fixed-width: 620px;
+  --max-width: 1170px;
+  --fixed-width: 620px;
+  --clr-white: #fff;
+  --clr-main-grey: #cecac3;
+  --clr-main-icons: #999183;
+  --clr-main-text: #9fbad0;
+  --clr-main: #66c3e6;
+  --clr-main-bg: #1e2022;
+  --clr-items-bg: #181a1b;
+  --clr-text: #e8e6e3;
+  --clr-subtext: #999183;
+  --clr-btn-bg: #13629b;
+  --clr-light-blue-attentive: #52abea;
+  --clr-danger: #dd5252;
+  --radius: 0.25rem;
+  --spacing: 0.1rem;
 }
 /*
 =============== 
