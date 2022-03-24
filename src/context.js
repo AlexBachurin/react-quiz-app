@@ -129,8 +129,7 @@ const AppProvider = ({ children }) => {
             closeModal,
             quiz,
             handleSubmit,
-            handleChange,
-            error
+            handleChange
         }
     }>
         {children}
